@@ -4,49 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/bg1"
     tools:context=".MainActivity">
 
 
-    <Button
-        android:id="@+id/googleBtn"
-        android:layout_width="329dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/facebookBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginBottom="16dp"
+        android:text="Forget password?"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="16dp"
+        android:text="Sign up!"
+        android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/googleBtn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/google_btn_background"
-        android:text="LOGIN WITH GOOGLE"
-        android:textColor="@android:color/white"
+        android:layout_marginStart="131dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="354dp"
+        app:srcCompat="@drawable/logo1" />
 
-        />
-
-    <Button
-        android:id="@+id/facebookBtn"
-        android:layout_width="329dp"
+    <EditText
+        android:id="@+id/username1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/facebook_btn_background"
-        android:padding="15dp"
-        android:text="LOGIN WITH FACEBOOK"
-        android:textColor="@android:color/white"
-
-        />
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="399dp"
+        android:background="#FFFFFF"
+        android:drawablePadding="15dp"
+        android:hint="UserName"
+        android:padding="16dp" />
 
 
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="339dp"
+        android:background="#FFFFFF"
+        android:drawablePadding="15dp"
+        android:hint="Password"
+        android:padding="16dp" />
 
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/googleBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="66dp"
+        android:background="@null"
+        app:srcCompat="@drawable/signin" />
+
+    <ImageButton
+        android:id="@+id/googleBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/facebookBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="15dp"
+        android:background="@null"
+        app:srcCompat="@drawable/google" />
+
+    <ImageButton
+        android:id="@+id/facebookBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="43dp"
+        android:background="@null"
+        app:srcCompat="@drawable/facebook" />
 
 
 </RelativeLayout>
