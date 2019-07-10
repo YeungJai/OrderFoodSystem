@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -54,6 +56,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "FACELOG";
 
-    private LoginButton mFacebookBtn;
 
-    private SignInButton mGoogleBtn;
+    private ImageButton mFacebookBtn, mGoogleBtn, btn_sign;
 
     GoogleSignInClient mGoogleSignInClient;
 
-    private Button btn_sign;
+    private TextView link_regist;
+
 
     EditText edtName, edtPassword;
 
@@ -83,14 +87,23 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mFacebookBtn = (LoginButton) findViewById(R.id.facebookBtn);
+        mFacebookBtn =  findViewById(R.id.facebookBtn);
 
-        mGoogleBtn = (SignInButton) findViewById(R.id.googleBtn);
+        mGoogleBtn = findViewById(R.id.googleBtn);
 
-        btn_sign = (Button) findViewById(R.id.btn_sign);
+        btn_sign =  findViewById(R.id.btn_sign);
 
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         edtName = (EditText) findViewById(R.id.edtName);
+
+        link_regist =(TextView) findViewById(R.id.link_regist);
+
+        link_regist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SignUp.class));
+            }
+        });
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
@@ -240,22 +253,22 @@ public class MainActivity extends AppCompatActivity {
                 .getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "signInWithCredential:success");
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "signInWithCredential:success");
 
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    updateUI();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        updateUI();
 
-                    mGoogleBtn.setEnabled(true);
+                        mGoogleBtn.setEnabled(true);
 
-                } else
-                {
-                    Log.w(TAG, "signin failure", task.getException());
-                    Toast.makeText(MainActivity.this, "Authentication failed. ",
-                            Toast.LENGTH_SHORT).show();
+                    } else
+                    {
+                        Log.w(TAG, "signin failure", task.getException());
+                        Toast.makeText(MainActivity.this, "Authentication failed. ",
+                                Toast.LENGTH_SHORT).show();
 
-                    mGoogleBtn.setEnabled(true);
-                }
+                        mGoogleBtn.setEnabled(true);
+                    }
                 });
 
     }
@@ -287,8 +300,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    // Google
 
 
 }
