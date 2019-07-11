@@ -155,7 +155,7 @@ public class SignIn extends AppCompatActivity {
                             Users users = dataSnapshot.child(edtName.getText().toString()).getValue(Users.class);
                             if (users.getPassword().equals(edtPassword.getText().toString())) {
                                 Toast.makeText(SignIn.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
-                                Intent signIn = new Intent(SignIn.this, AccountActivity.class);
+                                Intent signIn = new Intent(SignIn.this, Home.class);
                                 startActivity(signIn);
 
                             } else {
@@ -201,7 +201,7 @@ public class SignIn extends AppCompatActivity {
 
         Toast.makeText(this, "You're logged in", Toast.LENGTH_SHORT).show();
 
-        Intent accountIntent = new Intent(SignIn.this, AccountActivity.class);
+        Intent accountIntent = new Intent(SignIn.this, Home.class);
         startActivity(accountIntent);
         finish();
 
