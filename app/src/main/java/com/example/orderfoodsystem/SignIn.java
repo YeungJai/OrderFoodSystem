@@ -1,12 +1,10 @@
 package com.example.orderfoodsystem;
 
-import android.accounts.Account;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -22,33 +20,21 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-
-import com.google.android.gms.auth.api.Auth;
 
 import java.util.Arrays;
-import java.util.List;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.GoogleSignatureVerifier;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FacebookAuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,10 +42,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
-
-public class MainActivity extends AppCompatActivity {
+public class SignIn extends AppCompatActivity {
 
     static final int GOOGLE_SIGN = 123;
 
@@ -83,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_in);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -101,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         link_regist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SignUp.class));
+                startActivity(new Intent(SignIn.this, SignUp.class));
             }
         });
 
@@ -127,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mFacebookBtn.setEnabled(false);
 
-                LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("email", "public_profile"));
+                LoginManager.getInstance().logInWithReadPermissions(SignIn.this, Arrays.asList("email", "public_profile"));
                 LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
@@ -156,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         btn_sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ProgressDialog mDialog = new ProgressDialog(MainActivity.this);
+                final ProgressDialog mDialog = new ProgressDialog(SignIn.this);
                 mDialog.setMessage("Please waiting...");
                 mDialog.show();
 
@@ -170,17 +154,17 @@ public class MainActivity extends AppCompatActivity {
                             mDialog.dismiss();
                             Users users = dataSnapshot.child(edtName.getText().toString()).getValue(Users.class);
                             if (users.getPassword().equals(edtPassword.getText().toString())) {
-                                Toast.makeText(MainActivity.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
-                                Intent signIn = new Intent(MainActivity.this, AccountActivity.class);
+                                Toast.makeText(SignIn.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
+                                Intent signIn = new Intent(SignIn.this, AccountActivity.class);
                                 startActivity(signIn);
 
                             } else {
-                                Toast.makeText(MainActivity.this, "Sign in failed!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignIn.this, "Sign in failed!", Toast.LENGTH_SHORT).show();
                             }
                         }else
                         {
                             mDialog.dismiss();
-                            Toast.makeText(MainActivity.this, "User not exist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignIn.this, "User not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -217,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, "You're logged in", Toast.LENGTH_SHORT).show();
 
-        Intent accountIntent = new Intent(MainActivity.this, AccountActivity.class);
+        Intent accountIntent = new Intent(SignIn.this, AccountActivity.class);
         startActivity(accountIntent);
         finish();
 
@@ -264,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                     } else
                     {
                         Log.w(TAG, "signin failure", task.getException());
-                        Toast.makeText(MainActivity.this, "Authentication failed. ",
+                        Toast.makeText(SignIn.this, "Authentication failed. ",
                                 Toast.LENGTH_SHORT).show();
 
                         mGoogleBtn.setEnabled(true);
@@ -292,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                         }else {
                             // If sign in fails, display a message to the user
                             Log.w(TAG,"signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed. ",
+                            Toast.makeText(SignIn.this, "Authentication failed. ",
                                     Toast.LENGTH_SHORT).show();
 
                             mFacebookBtn.setEnabled(true);

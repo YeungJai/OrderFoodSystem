@@ -8,72 +8,56 @@
     tools:context=".SignUp">
 
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="382dp"
-        android:layout_height="254dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="29dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_bg2" />
-
     <EditText
         android:id="@+id/edtName"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="490dp"
-
+        android:layout_marginBottom="505dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/icon_user"
         android:drawablePadding="15dp"
         android:hint="User Name"
         android:inputType="text"
-        android:padding="16dp"
-
-        />
+        android:padding="16dp" />
 
     <EditText
         android:id="@+id/edtPassword"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="430dp"
+        android:layout_marginBottom="424dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/icon_password"
         android:drawablePadding="15dp"
         android:hint="Password"
         android:inputType="numberPassword"
-        android:padding="16dp"
-
-        />
+        android:padding="16dp" />
 
     <EditText
         android:id="@+id/edtPhone"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="370dp"
+        android:layout_marginBottom="329dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/icon_phone"
         android:drawablePadding="15dp"
         android:hint="Phone"
         android:inputType="number"
-        android:padding="16dp"
-        android:drawableStart="@drawable/icon_phone"
-
-        />
+        android:padding="16dp" />
 
     <EditText
         android:id="@+id/edtEmail"
@@ -82,14 +66,15 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="310dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="247dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/icon_mail"
         android:drawablePadding="15dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:padding="16dp"
-        android:drawableStart="@drawable/icon_mail"
 
         />
 
@@ -108,7 +93,6 @@
         android:background="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/signupbtn" />
 
     <ImageButton

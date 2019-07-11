@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".MainActivity">
+    tools:context=".SignIn">
 
 
     <TextView
@@ -43,7 +43,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="132dp"
         android:layout_marginEnd="132dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="50dp"
         app:srcCompat="@drawable/logo1" />
 
     <ImageButton
@@ -98,18 +98,6 @@
         android:background="@null"
         app:srcCompat="@drawable/signin" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_sign"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="39dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="29dp"
-        app:srcCompat="@drawable/icon_bg1" />
-
     <EditText
         android:id="@+id/edtName"
         android:layout_width="match_parent"
@@ -119,13 +107,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="418dp"
+        android:layout_marginBottom="424dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/icon_user"
         android:drawablePadding="15dp"
         android:hint="User Name"
-        android:padding="16dp"
         android:inputType="text"
-        android:drawableStart="@drawable/icon_user"
-        />
+        android:padding="16dp" />
 
     <EditText
         android:id="@+id/edtPassword"
@@ -136,12 +124,12 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="352dp"
+        android:layout_marginBottom="344dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/icon_password"
         android:drawablePadding="15dp"
         android:hint="Password"
-        android:padding="16dp"
         android:inputType="textPassword"
-        android:drawableStart="@drawable/icon_password"
-        />
+        android:padding="16dp" />
 
 </RelativeLayout>

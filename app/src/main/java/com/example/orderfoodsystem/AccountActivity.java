@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -37,7 +36,7 @@ public class AccountActivity extends AppCompatActivity {
 
                mAuth.signOut();
                LoginManager.getInstance().logOut();
-                Intent accountIntent = new Intent(AccountActivity.this, MainActivity.class);
+                Intent accountIntent = new Intent(AccountActivity.this, SignIn.class);
                 startActivity(accountIntent);
                 Toast.makeText(AccountActivity.this, "You're logged out", Toast.LENGTH_SHORT).show();
                 finish();
@@ -65,7 +64,7 @@ public class AccountActivity extends AppCompatActivity {
 
         Toast.makeText(AccountActivity.this, "You're logged out", Toast.LENGTH_SHORT).show();
 
-        Intent accountIntent = new Intent(AccountActivity.this, MainActivity.class);
+        Intent accountIntent = new Intent(AccountActivity.this, SignIn.class);
         startActivity(accountIntent);
         finish();
     }
