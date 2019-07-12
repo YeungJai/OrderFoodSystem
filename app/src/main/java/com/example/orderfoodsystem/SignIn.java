@@ -61,6 +61,8 @@ public class SignIn extends AppCompatActivity {
 
     private TextView link_regist;
 
+    FirebaseDatabase database;
+    DatabaseReference category;
 
     EditText edtName, edtPassword;
 
@@ -82,6 +84,10 @@ public class SignIn extends AppCompatActivity {
 
         link_regist =(TextView) findViewById(R.id.link_regist);
 
+        database = FirebaseDatabase.getInstance();
+        category = database.getReference("Category");
+
+
         link_regist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +97,8 @@ public class SignIn extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
+        DatabaseReference table_category = database.getReference("Category");
+
 
 
         mCallbackManager = CallbackManager.Factory.create();
