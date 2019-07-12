@@ -1,6 +1,7 @@
 package com.example.orderfoodsystem.Model;
 
 public class Users {
+    private String Name;
     private String Email;
     private String Password;
     private String Phone;
@@ -9,10 +10,19 @@ public class Users {
 
     }
 
-    public Users(String email, String password, String phone){
+    public Users(String email, String password, String phone, String name){
+        Name  = name;
         Email = email;
         Password = password;
         Phone = phone;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getName() {
+        return Name;
     }
 
     public String getEmail() {

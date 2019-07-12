@@ -55,12 +55,12 @@ public class SignUp extends AppCompatActivity {
                         if (dataSnapshot.child(edtName.getText().toString()).exists())
                         {
                             mDialog.dismiss();
-                            Toast.makeText(SignUp.this, "Phone Number already register", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this, "Already register", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             mDialog.dismiss();
-                            Users user = new Users(edtEmail.getText().toString(),edtPassword.getText().toString(),edtPhone.getText().toString());
+                            Users user = new Users(edtName.getText().toString(),edtEmail.getText().toString(),edtPassword.getText().toString(),edtPhone.getText().toString());
                             table_user.child(edtName.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this, "Sign up successfully !", Toast.LENGTH_SHORT).show();
                             finish();
