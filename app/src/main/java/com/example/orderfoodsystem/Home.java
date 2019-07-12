@@ -2,7 +2,6 @@ package com.example.orderfoodsystem;
 
 import android.os.Bundle;
 
-import com.example.orderfoodsystem.Common.Common;
 import com.example.orderfoodsystem.Interface.ItemClickListener;
 import com.example.orderfoodsystem.Model.Category;
 import com.example.orderfoodsystem.ViewHoler.MenuViewHolder;
