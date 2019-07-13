@@ -1,7 +1,9 @@
 package com.example.orderfoodsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.daimajia.slider.library.SliderLayout;
 import com.example.orderfoodsystem.Interface.ItemClickListener;
 import com.example.orderfoodsystem.Model.Category;
 import com.example.orderfoodsystem.ViewHoler.MenuViewHolder;
@@ -25,12 +27,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.HashMap;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,9 +44,18 @@ public class Home extends AppCompatActivity
 
     TextView txtFullName;
 
+    //Slider
+    HashMap<String, String> image_list;
+    SliderLayout mSlider;
+
 
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
+
+    FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
+
+//    private SliderLayout sliderLayout;
+//    private PagerIndicator indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,22 +88,28 @@ public class Home extends AppCompatActivity
 
 
         //Set Name for user
-        View headerView = navigationView.getHeaderView(0);
-        txtFullName = (TextView)headerView.findViewById(R.id.txtFullName);
+        View headerView = navigationView.getHeaderView(1);
+//        txtFullName = (TextView)headerView.findViewById(R.id.txtFullName);
 //        txtFullName.setText(Common.currentUser.getPhone());
 
         //Load menu
         recycler_menu = findViewById(R.id.recycler_menu);
         recycler_menu.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recycler_menu.setLayoutManager(layoutManager);
+//        layoutManager = new LinearLayoutManager(this);
+//        recycler_menu.setLayoutManager(layoutManager);
+//        recycler_menu.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recycler_menu.setLayoutManager(new GridLayoutManager(this, 2));
+        recycler_menu.setHasFixedSize(true);
 
         loadmenu();
+
+        //Setup Slider
+//        setupSlider();
     }
 
     private void loadmenu() {
 
-        FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class,R.layout.menu_item, MenuViewHolder.class,category) {
+        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class,R.layout.menu_item, MenuViewHolder.class,category) {
             @Override
             protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
                 viewHolder.txtMenuName.setText(model.getName());
@@ -100,8 +118,11 @@ public class Home extends AppCompatActivity
                 Category clickItem = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
-                    public void onClick(View view, int postion, boolean isLongClick) {
-                        Toast.makeText(Home.this, ""+clickItem.getName(), Toast.LENGTH_SHORT).show();
+                    public void onClick(View view, int position, boolean isLongClick) {
+                        //Get CategoryId and send to new activity
+                        Intent drinkList = new Intent(Home.this, FoodList.class);
+                        drinkList.putExtra("CategoryId", adapter.getRef(position).getKey());
+                        startActivity(drinkList);
                     }
                 });
             }
@@ -139,7 +160,50 @@ public class Home extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+
     }
+
+
+
+//    private void setupSlider() {
+//        mSlider = findViewById(R.id.slider);
+//        image_list = new HashMap<>();
+//
+//        DatabaseReference banner = database.getReference("Banner");
+//
+//        banner.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot postSnapShot:dataSnapshot.getChildren())
+//                {
+//                    Banner banner = postSnapShot.getValue(Banner.class);
+//
+//                    image_list.put(banner.getName()+"_"+ banner.getId(),banner.getImage());
+//                }
+//                for (String image_list.keyset())
+//                {
+//                    String[] keySplit = key.split("_");
+//                    String nameOfFood = keySplit[0];
+//                    String idOfFood = keySplit[1];
+//
+//                    // Create Slider
+//                    TextSliderView textSliderView = TextSliderView(getBaseContext());
+//                    textSliderView
+//                            .description(nameOfFood)
+//                            .image(image_list.get(key))
+//
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
