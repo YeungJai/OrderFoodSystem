@@ -8,7 +8,8 @@
     android:weightSum="3"
     app:layout_behavior=""
     tools:context=".Home"
-    tools:showIn="@layout/app_bar_home">
+    tools:showIn="@layout/app_bar_home"
+    android:background="@drawable/bg222">
 
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
