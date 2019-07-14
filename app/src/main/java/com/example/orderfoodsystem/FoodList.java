@@ -4,16 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.orderfoodsystem.Common.Common;
 import com.example.orderfoodsystem.Interface.ItemClickListener;
-import com.example.orderfoodsystem.Model.Category;
-import com.example.orderfoodsystem.Model.Drink;
+import com.example.orderfoodsystem.Model.Food;
 import com.example.orderfoodsystem.ViewHoler.FoodViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -26,11 +24,11 @@ public class FoodList extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
-    DatabaseReference drinkList;
+    DatabaseReference foodList;
 
     String categoryId="";
 
-    FirebaseRecyclerAdapter<Drink, FoodViewHolder> adapter;
+    FirebaseRecyclerAdapter<Food, FoodViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class FoodList extends AppCompatActivity {
 
         //Firebase
         database = FirebaseDatabase.getInstance();
-        drinkList = database.getReference("Drink");
+        foodList = database.getReference("Food");
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_drink);
         recyclerView.setHasFixedSize(true);
@@ -49,7 +47,7 @@ public class FoodList extends AppCompatActivity {
         //Get Intent
         if (getIntent() != null)
             categoryId = getIntent().getStringExtra("CategoryId");
-        if (!categoryId.isEmpty() && categoryId != null)
+        if (categoryId !=null && !categoryId.isEmpty())
         {
             loadListDrink(categoryId);
         }
@@ -57,23 +55,27 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void loadListDrink(String categoryId) {
-        adapter = new FirebaseRecyclerAdapter<Drink, FoodViewHolder>(Drink.class,
+        adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class,
                 R.layout.food_item,
                 FoodViewHolder.class,
-                drinkList.orderByChild("MenuId").equalTo(categoryId)
+                foodList.orderByChild("MenuId").equalTo(categoryId)
                 ) {
             @Override
-            protected void populateViewHolder(FoodViewHolder viewHolder, Drink drink, int i) {
-                viewHolder.drink_name.setText(drink.getName());
-                viewHolder.drink_price.setText(drink.getPrice());
-                Picasso.with(getBaseContext()).load(drink.getImage())
-                        .into(viewHolder.drink_image);
+            protected void populateViewHolder(FoodViewHolder viewHolder, Food food, int i) {
+                viewHolder.food_name.setText(food.getName());
+                viewHolder.food_price.setText(food.getPrice());
+                Picasso.with(getBaseContext()).load(food.getImage())
+                        .into(viewHolder.food_image);
 
-                final Drink local = drink;
+                final Food local = food;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(FoodList.this, ""+local.getName(), Toast.LENGTH_SHORT).show();
+                        //Start new activity
+                        Intent foodDetail = new Intent(FoodList.this, FoodDetail.class);
+                        foodDetail.putExtra("FoodId", adapter.getRef(position).getKey());
+                        startActivity(foodDetail);
+
                     }
                 });
 

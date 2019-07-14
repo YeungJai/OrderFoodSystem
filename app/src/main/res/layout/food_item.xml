@@ -17,7 +17,7 @@
 
         <ImageView
             android:id="@+id/drink_image"
-            android:layout_width="150dp"
+            android:layout_width="370dp"
             android:layout_height="200dp" />
 
         <TextView
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="$15"
+                android:text="Hot"
                 android:textColor="@android:color/white"
                 android:background="@drawable/drink_text_round"
                 android:textSize="12sp"
