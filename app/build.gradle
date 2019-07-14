@@ -31,6 +31,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.firebaseui:firebase-ui-auth:5.0.0'
     implementation 'com.cepheuen.elegant-number-button:lib:1.0.3'
+    implementation 'info.hoang8f:fbutton:1.0.5'
 
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

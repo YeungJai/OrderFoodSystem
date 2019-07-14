@@ -3,7 +3,6 @@ package com.example.orderfoodsystem.Database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.example.orderfoodsystem.Model.Order;
@@ -45,7 +44,7 @@ public class Database extends SQLiteAssetHelper {
         return result;
     }
 
-    public void addToGart(Order order){
+    public void addToCart(Order order){
         SQLiteDatabase db = getReadableDatabase();
         String query = String.format("INSERT INTO OrderDetail(ProductId, ProductName, Quantity, Price, Discount) VALUES('%s','%s','%s','%s','%s');",
                 order.getProductID(),

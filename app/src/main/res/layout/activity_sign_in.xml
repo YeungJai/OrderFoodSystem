@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg111"
+    android:background="@drawable/bg"
     tools:context=".SignIn">
 
 
@@ -44,7 +44,7 @@
         android:layout_marginStart="136dp"
         android:layout_marginEnd="128dp"
         android:layout_marginBottom="-3dp"
-        app:srcCompat="@drawable/newlogo" />
+        />
 
     <ImageButton
         android:id="@+id/facebookBtn"

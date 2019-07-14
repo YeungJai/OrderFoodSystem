@@ -9,7 +9,7 @@
     app:layout_behavior=""
     tools:context=".Home"
     tools:showIn="@layout/app_bar_home"
-    android:background="@drawable/bg222">
+    android:background="@drawable/bg">
 
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
