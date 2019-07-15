@@ -31,9 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:backgroundTint="@android:color/white"
-        app:srcCompat="@drawable/ic_car"
-        />
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/btn_car" />
 
 
 
