@@ -24,7 +24,7 @@
             >
 
             <ImageView
-                android:background="@drawable/edit_text_background"
+                android:background="@android:color/white"
                 android:id="@+id/img_food"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -36,6 +36,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 app:title="Food Name"
+                app:titleTextColor="@android:color/holo_orange_dark"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.orderfoodsystem.Common.Common;
 import com.example.orderfoodsystem.Model.Users;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -126,6 +127,7 @@ public class SignIn extends AppCompatActivity {
                         // App code
                         Log.d(TAG, "Facebook:onSuccess:" + loginResult);
                         handleFacebookAccessToken(loginResult.getAccessToken());
+
                     }
 
                     @Override
@@ -161,9 +163,12 @@ public class SignIn extends AppCompatActivity {
                             // Get user information
                             mDialog.dismiss();
                             Users users = dataSnapshot.child(edtName.getText().toString()).getValue(Users.class);
-                            if (users.getPassword().equals(edtPassword.getText().toString())) {
+                            users.setName(edtName.getText().toString());
+                            if (users.getPassword().equals(edtPassword.getText().toString()))
+                            {
                                 Toast.makeText(SignIn.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
                                 Intent signIn = new Intent(SignIn.this, Home.class);
+                                Common.currentUser = users;
                                 startActivity(signIn);
 
                             } else {
@@ -212,6 +217,8 @@ public class SignIn extends AppCompatActivity {
         Intent accountIntent = new Intent(SignIn.this, Home.class);
         startActivity(accountIntent);
         finish();
+
+
 
     }
 
