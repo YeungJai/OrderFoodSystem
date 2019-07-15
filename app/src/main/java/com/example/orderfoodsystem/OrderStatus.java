@@ -39,16 +39,17 @@ public class OrderStatus extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         //I change the value from
+        loadOrders(Common.currentUser.getName());
         loadOrders(Common.currentUser.getPhone());
     }
 
     //loadOrders() method
-    private void loadOrders(String phone) {
+    private void loadOrders(String name) {
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(
                 Request.class,
                 R.layout.order_layout,
                 OrderViewHolder.class,
-                requests.orderByChild("phone").equalTo(phone)
+                requests.orderByChild("name").equalTo(name)
         ) {
             @Override
             protected void populateViewHolder(OrderViewHolder viewHolder, Request model, int position) {

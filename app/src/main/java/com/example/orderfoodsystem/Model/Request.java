@@ -12,10 +12,10 @@ public class Request {
     private String status;
     private List<Order> foods; //list of fod orders
 
-    public Request(String name, String phone, String email, EditText editAddress, String total, List<Order> cart) {
+    public Request() {
     }
 
-    public Request(String currentUserName, String phone, EditText editAddress, String total, List<Order> foods) {
+    public Request(String phone, String name, String address, String total, List<Order> foods) {
         this.phone = phone;
         this.name = name;
         this.address = address;

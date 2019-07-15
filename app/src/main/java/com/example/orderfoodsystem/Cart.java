@@ -89,11 +89,11 @@ public class Cart extends AppCompatActivity {
 
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialogInterface, int i) {
                 Request request = new Request(
                         Common.currentUser.getName(),
                         Common.currentUser.getPhone(),
-                        editAddress,
+                        editAddress.getText().toString(),
                         txtTotalPrice.getText().toString(),
                         cart
                 );

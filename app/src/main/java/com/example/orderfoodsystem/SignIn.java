@@ -82,6 +82,7 @@ public class SignIn extends AppCompatActivity {
 
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         edtName = (EditText) findViewById(R.id.edtName);
+//        edtPhone = findViewById(R.id.edtPhone);
 
         link_regist =(TextView) findViewById(R.id.link_regist);
 
@@ -164,6 +165,7 @@ public class SignIn extends AppCompatActivity {
                             mDialog.dismiss();
                             Users users = dataSnapshot.child(edtName.getText().toString()).getValue(Users.class);
                             users.setName(edtName.getText().toString());
+//                            users.setPhone(edtPhone.getText().toString());
                             if (users.getPassword().equals(edtPassword.getText().toString()))
                             {
                                 Toast.makeText(SignIn.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
@@ -255,7 +257,7 @@ public class SignIn extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
 
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        FirebaseUser User = mAuth.getCurrentUser();
                         updateUI();
 
                         mGoogleBtn.setEnabled(true);

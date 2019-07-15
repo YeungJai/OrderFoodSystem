@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.daimajia.slider.library.SliderLayout;
+import com.example.orderfoodsystem.Common.Common;
 import com.example.orderfoodsystem.Interface.ItemClickListener;
 import com.example.orderfoodsystem.Model.Category;
 import com.example.orderfoodsystem.ViewHoler.MenuViewHolder;
@@ -88,9 +89,9 @@ public class Home extends AppCompatActivity
 
 
         //Set Name for user
-        View headerView = navigationView.getHeaderView(1);
-//        txtFullName = (TextView)headerView.findViewById(R.id.txtFullName);
-//        txtFullName.setText(Common.currentUser.getPhone());
+        View headerView = navigationView.getHeaderView(0);
+        txtFullName = (TextView)headerView.findViewById(R.id.txtFullName);
+//        txtFullName.setText(Common.currentUser.getName());
 
         //Load menu
         recycler_menu = findViewById(R.id.recycler_menu);

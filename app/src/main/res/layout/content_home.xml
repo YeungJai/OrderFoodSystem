@@ -9,7 +9,7 @@
     app:layout_behavior=""
     tools:context=".Home"
     tools:showIn="@layout/app_bar_home"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg1">
 
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
@@ -18,6 +18,7 @@
         android:layout_height="200dp"/>
 
         <TextView
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
