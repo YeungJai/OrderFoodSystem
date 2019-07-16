@@ -5,6 +5,7 @@ public class Users {
     private String Email;
     private String Password;
     private String Phone;
+    private String IsStaff;
 
     public Users() {
 
@@ -47,5 +48,13 @@ public class Users {
 
     public void setPhone(String phone) {
         Phone = phone;
+    }
+
+    public String getIsStaff() {
+        return IsStaff;
+    }
+
+    public void setIsStaff(String isStaff) {
+        IsStaff = isStaff;
     }
 }

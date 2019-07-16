@@ -61,7 +61,7 @@ public class FoodList extends AppCompatActivity {
 
         //Get Intent
         if (getIntent() != null)
-            categoryId = getIntent().getStringExtra("CategoryId");
+            categoryId = getIntent().getStringExtra("categoryId");
         if (categoryId !=null && !categoryId.isEmpty())
         {
             loadListDrink(categoryId);
@@ -123,7 +123,7 @@ public class FoodList extends AppCompatActivity {
                 Food.class,
                 R.layout.food_item,
                 FoodViewHolder.class,
-                foodList.orderByChild("Name").equalTo(text.toString())
+                foodList.orderByChild("name").equalTo(text.toString())
         ) {
             @Override
             protected void populateViewHolder(FoodViewHolder viewHolder, Food food, int i) {
@@ -139,7 +139,7 @@ public class FoodList extends AppCompatActivity {
                     public void onClick(View view, int position, boolean isLongClick) {
                         //Start new activity
                         Intent foodDetail = new Intent(FoodList.this, FoodDetail.class);
-                        foodDetail.putExtra("FoodId", searchAdapter.getRef(position).getKey());
+                        foodDetail.putExtra("foodId", searchAdapter.getRef(position).getKey());
                         startActivity(foodDetail);
 
                     }
@@ -151,7 +151,7 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void loadSuggest() {
-        foodList.orderByChild("MenuId").equalTo(categoryId)
+        foodList.orderByChild("menuId").equalTo(categoryId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -173,7 +173,7 @@ public class FoodList extends AppCompatActivity {
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class,
                 R.layout.food_item,
                 FoodViewHolder.class,
-                foodList.orderByChild("MenuId").equalTo(categoryId)
+                foodList.orderByChild("menuId").equalTo(categoryId)
                 ) {
             @Override
             protected void populateViewHolder(FoodViewHolder viewHolder, Food food, int i) {
@@ -188,7 +188,7 @@ public class FoodList extends AppCompatActivity {
                     public void onClick(View view, int position, boolean isLongClick) {
                         //Start new activity
                         Intent foodDetail = new Intent(FoodList.this, FoodDetail.class);
-                        foodDetail.putExtra("FoodId", adapter.getRef(position).getKey());
+                        foodDetail.putExtra("foodId", adapter.getRef(position).getKey());
                         startActivity(foodDetail);
 
                     }
