@@ -197,7 +197,7 @@
         android:id="@+id/btn_OrderNow"
         android:text="Order Now"
         android:layout_gravity="center"
-        android:layout_width="360sp"
+        android:layout_width="355sp"
         android:layout_height="wrap_content"
 
         />

@@ -13,7 +13,8 @@
         android:orientation="vertical"
         android:layout_margin="2dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ImageView
             android:layout_margin="10dp"
@@ -30,6 +31,13 @@
             android:textSize="25dp"
             android:textStyle="bold"
             />
+
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/ic_favorite_border_black_24dp"
+            android:id="@+id/fav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
         <LinearLayout
@@ -62,6 +70,7 @@
 
 
         </LinearLayout>
+
 
 
 
