@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SignUp extends AppCompatActivity {
 
-    EditText edtName, edtPassword, edtPhone, edtEmail;
+    EditText edtName, edtPassword, edtPhone, edtEmail, edtSecureCode;
     ImageButton btnSignUp, btnBack;
 
     @Override
@@ -34,6 +34,7 @@ public class SignUp extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         edtPhone = findViewById(R.id.edtPhone);
         edtEmail = findViewById(R.id.edtEmail);
+        edtSecureCode = findViewById(R.id.edtSecureCode);
 
         btnSignUp = findViewById(R.id.btnSignUp);
         btnBack = findViewById(R.id.btnBack);
@@ -60,7 +61,7 @@ public class SignUp extends AppCompatActivity {
                         else
                         {
                             mDialog.dismiss();
-                            Users user = new Users(edtName.getText().toString(),edtPassword.getText().toString(),edtEmail.getText().toString(),edtPhone.getText().toString());
+                            Users user = new Users(edtName.getText().toString(),edtPassword.getText().toString(),edtEmail.getText().toString(),edtPhone.getText().toString(),edtSecureCode.getText().toString());
                             table_user.child(edtName.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this, "Sign up successfully !", Toast.LENGTH_SHORT).show();
                             finish();

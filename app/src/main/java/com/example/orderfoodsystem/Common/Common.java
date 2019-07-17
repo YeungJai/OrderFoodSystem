@@ -8,6 +8,10 @@ public class Common {
 
     public static final String DELETE = "Delete";
 
+    public static final String USER_KEY = "Delete";
+
+    public static final String PWD_KEY = "Delete";
+
     public static String convertCodeToStatus(String status) {
         if (status.equals("0")){
             return "Doing Now";

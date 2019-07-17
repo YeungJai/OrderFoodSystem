@@ -6,16 +6,18 @@ public class Users {
     private String Password;
     private String Phone;
     private String IsStaff;
+    private String secureCode;
 
     public Users() {
 
     }
 
-    public Users(String email, String password, String phone, String name){
+    public Users(String email, String password, String phone, String name, String secureCode){
         Name  = name;
         Email = email;
         Password = password;
         Phone = phone;
+        this.secureCode = secureCode;
     }
 
     public void setName(String name) {
@@ -56,5 +58,13 @@ public class Users {
 
     public void setIsStaff(String isStaff) {
         IsStaff = isStaff;
+    }
+
+    public String getSecureCode() {
+        return secureCode;
+    }
+
+    public void setSecureCode(String secureCode) {
+        this.secureCode = secureCode;
     }
 }

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.orderfoodsystem.Database.Database;
 import com.example.orderfoodsystem.Interface.ItemClickListener;
 import com.example.orderfoodsystem.Model.Food;
 import com.example.orderfoodsystem.ViewHoler.FoodViewHolder;
@@ -45,6 +46,8 @@ public class FoodList extends AppCompatActivity {
     List<String> suggestList = new ArrayList<>();
     MaterialSearchBar materialSearchBar;
 
+    Database localDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,9 @@ public class FoodList extends AppCompatActivity {
         //Firebase
         database = FirebaseDatabase.getInstance();
         foodList = database.getReference("Food");
+
+        //Local DB
+        localDB= new Database(this);
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_drink);
         recyclerView.setHasFixedSize(true);
@@ -126,12 +132,14 @@ public class FoodList extends AppCompatActivity {
                 foodList.orderByChild("name").equalTo(text.toString())
         ) {
             @Override
-            protected void populateViewHolder(FoodViewHolder viewHolder, Food food, int i) {
+            protected void populateViewHolder(FoodViewHolder viewHolder, Food food, final int i) {
 
                 viewHolder.food_name.setText(food.getName());
                 viewHolder.food_price.setText(food.getPrice());
                 Picasso.with(getBaseContext()).load(food.getImage())
                         .into(viewHolder.food_image);
+
+
 
                 final Food local = food;
                 viewHolder.setItemClickListener(new ItemClickListener() {
@@ -181,6 +189,31 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.food_price.setText(food.getPrice());
                 Picasso.with(getBaseContext()).load(food.getImage())
                         .into(viewHolder.food_image);
+
+                // Add fav
+                if (localDB.isFavorites(adapter.getRef(i).getKey()))
+                    viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
+
+                //Click
+                viewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!localDB.isFavorites(adapter.getRef(i).getKey()))
+                        {
+                            localDB.addToFavorites(adapter.getRef(i).getKey());
+                            viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
+                            Toast.makeText(FoodList.this, ""+ food.getName()+"added to Favorites", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            localDB.removeFromFavorites(adapter.getRef(i).getKey());
+                            viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
+                            Toast.makeText(FoodList.this, ""+ food.getName()+"removed from Favorites", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
 
                 final Food local = food;
                 viewHolder.setItemClickListener(new ItemClickListener() {

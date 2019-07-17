@@ -194,7 +194,7 @@
     <ImageButton
         android:id="@+id/btn_OrderNow"
         android:layout_gravity="center"
-        android:layout_width="360sp"
+        android:layout_width="355sp"
         android:layout_height="wrap_content"
         android:background="@drawable/confirm"
 

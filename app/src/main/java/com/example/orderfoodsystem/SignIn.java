@@ -1,16 +1,21 @@
 package com.example.orderfoodsystem;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderfoodsystem.Common.Common;
@@ -24,6 +29,7 @@ import com.facebook.login.LoginResult;
 
 import java.util.Arrays;
 
+import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -42,6 +48,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import io.paperdb.Paper;
 
 
 public class SignIn extends AppCompatActivity {
@@ -64,8 +72,11 @@ public class SignIn extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference category;
+    DatabaseReference table_user;
 
     EditText edtName, edtPassword;
+
+    TextView txtForgotPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +90,26 @@ public class SignIn extends AppCompatActivity {
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         edtName = (EditText) findViewById(R.id.edtName);
 //        edtPhone = findViewById(R.id.edtPhone);
+        txtForgotPwd = findViewById(R.id.txtForgotPwd);
+
+        txtForgotPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showForgotPwdDialog();
+            }
+        });
+
+
+
+        //Init Paper
+        Paper.init(this);
 
         link_regist =(TextView) findViewById(R.id.link_regist);
 
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
+        table_user = database.getReference("User");
+
 
 
         link_regist.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +129,11 @@ public class SignIn extends AppCompatActivity {
         btn_sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Save user & password
+
+
+
                 final ProgressDialog mDialog = new ProgressDialog(SignIn.this);
                 mDialog.setMessage("Please waiting...");
                 mDialog.show();
@@ -113,7 +144,6 @@ public class SignIn extends AppCompatActivity {
                         // Check if user not exist in database
                         if (dataSnapshot.child(edtName.getText().toString()).exists()) {
 
-                            // Get user information
                             mDialog.dismiss();
                             Users users = dataSnapshot.child(edtName.getText().toString()).getValue(Users.class);
                             users.setName(edtName.getText().toString());
@@ -142,6 +172,56 @@ public class SignIn extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void showForgotPwdDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Forgot Password");
+        builder.setMessage("Enter you code");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View forgot_view = inflater.inflate(R.layout.forgot_password_layout,null);
+
+        builder.setView(forgot_view);
+        builder.setIcon(R.drawable.ic_security_black_24dp);
+
+        EditText edtName = forgot_view.findViewById(R.id.edtName);
+        EditText edtSecureCode = forgot_view.findViewById(R.id.edtSecureCode);
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                table_user.addValueEventListener(new ValueEventListener(){
+
+                    @Override
+                    public void onDataChange( DataSnapshot dataSnapshot) {
+                        Users user = dataSnapshot.child(edtName.getText().toString())
+                                .getValue(Users.class);
+
+                        if (user.getSecureCode().equals(edtSecureCode.getText().toString()))
+                            Toast.makeText(SignIn.this, "You Password : " + user.getPassword(), Toast.LENGTH_SHORT).show();
+                        else {
+                            Toast.makeText(SignIn.this, "Wrong Code", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        builder.show();
     }
 
 
