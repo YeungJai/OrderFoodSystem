@@ -74,7 +74,6 @@ public class SignIn extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
         btn_sign =  findViewById(R.id.btn_sign);
 
         edtPassword = (EditText) findViewById(R.id.edtPassword);
@@ -97,8 +96,6 @@ public class SignIn extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
         DatabaseReference table_category = database.getReference("Category");
-
-
 
         mCallbackManager = CallbackManager.Factory.create();
 

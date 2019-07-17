@@ -9,7 +9,7 @@
     app:layout_behavior=""
     tools:context=".Home"
     tools:showIn="@layout/app_bar_home"
-    android:background="@drawable/bg1"
+    android:background="@drawable/ubg"
     android:layout_below="@+id/toolbar"
     >
 
