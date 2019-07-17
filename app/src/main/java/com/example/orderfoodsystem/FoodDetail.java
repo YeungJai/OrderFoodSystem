@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import info.hoang8f.widget.FButton;
+
 public class FoodDetail extends AppCompatActivity {
 
     TextView food_name, food_price, food_description;
@@ -39,6 +41,8 @@ public class FoodDetail extends AppCompatActivity {
 
     Food currentFood;
 
+    private FButton btn_OrderNow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +54,11 @@ public class FoodDetail extends AppCompatActivity {
 
         //Init view
         numberButton =(ElegantNumberButton) findViewById(R.id.number_button);
-        btnCart =(FloatingActionButton) findViewById(R.id.btnCart);
+//        btnCart =(FloatingActionButton) findViewById(R.id.btnCart);
 
-        btnCart.setOnClickListener(new View.OnClickListener() {
+        btn_OrderNow = findViewById(R.id.btn_OrderNow);
+
+        btn_OrderNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Database(getBaseContext()).addToCart(new Order(
@@ -66,6 +72,21 @@ public class FoodDetail extends AppCompatActivity {
                 Toast.makeText(FoodDetail.this, "Added", Toast.LENGTH_SHORT).show();
             }
         });
+
+//        btnCart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new Database(getBaseContext()).addToCart(new Order(
+//                        foodId,
+//                        currentFood.getName(),
+//                        numberButton.getNumber(),
+//                        currentFood.getPrice(),
+//                        currentFood.getDiscount()
+//                ));
+//
+//                Toast.makeText(FoodDetail.this, "Added", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         food_description = (TextView) findViewById(R.id.food_description);
         food_name = (TextView) findViewById(R.id.food_name);

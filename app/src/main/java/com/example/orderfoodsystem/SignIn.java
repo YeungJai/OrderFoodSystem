@@ -56,7 +56,7 @@ public class SignIn extends AppCompatActivity {
     private static final String TAG = "FACELOG";
 
 
-    private ImageButton mFacebookBtn, mGoogleBtn, btn_sign;
+    private ImageButton btn_sign;
 
     GoogleSignInClient mGoogleSignInClient;
 
@@ -74,9 +74,6 @@ public class SignIn extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mFacebookBtn =  findViewById(R.id.facebookBtn);
-
-        mGoogleBtn = findViewById(R.id.googleBtn);
 
         btn_sign =  findViewById(R.id.btn_sign);
 
@@ -105,48 +102,6 @@ public class SignIn extends AppCompatActivity {
 
         mCallbackManager = CallbackManager.Factory.create();
 
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
-                .Builder()
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
-
-        mGoogleBtn.setOnClickListener(v -> SignInGoogle());
-
-
-        mFacebookBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mFacebookBtn.setEnabled(false);
-
-                LoginManager.getInstance().logInWithReadPermissions(SignIn.this, Arrays.asList("email", "public_profile"));
-                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                        Log.d(TAG, "Facebook:onSuccess:" + loginResult);
-                        handleFacebookAccessToken(loginResult.getAccessToken());
-
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Log.d(TAG, "facebook:onCancel: ");
-                        // App code
-
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        Log.d(TAG, "facebook:nError", error);
-                        // App code
-                    }
-                });
-
-            }
-        });
 
         btn_sign.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,11 +148,6 @@ public class SignIn extends AppCompatActivity {
     }
 
 
-    void SignInGoogle() {
-        Intent signIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signIntent, GOOGLE_SIGN);
-    }
-
     @Override
     public void onStart(){
         super.onStart();
@@ -231,76 +181,8 @@ public class SignIn extends AppCompatActivity {
 
 
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == GOOGLE_SIGN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn
-                    .getSignedInAccountFromIntent(data);
-
-            try {
-
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                if (account != null) firebaseAuthWithGoogle(account);
-
-            } catch (ApiException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        Log.d(TAG, "firebaseAuthWithGoogle: " + account.getId());
-
-        AuthCredential credential = GoogleAuthProvider
-                .getCredential(account.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithCredential:success");
-
-                        FirebaseUser User = mAuth.getCurrentUser();
-                        updateUI();
-
-                        mGoogleBtn.setEnabled(true);
-
-                    } else
-                    {
-                        Log.w(TAG, "signin failure", task.getException());
-                        Toast.makeText(SignIn.this, "Authentication failed. ",
-                                Toast.LENGTH_SHORT).show();
-
-                        mGoogleBtn.setEnabled(true);
-                    }
-                });
-
-    }
-
-    private void handleFacebookAccessToken(AccessToken token){
-        Log.d(TAG, "handleFacebookAccessToken:" + token );
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete( Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-                            mFacebookBtn.setEnabled(true);
-
-                            updateUI();
-                        }else {
-                            // If sign in fails, display a message to the user
-                            Log.w(TAG,"signInWithCredential:failure", task.getException());
-                            Toast.makeText(SignIn.this, "Authentication failed. ",
-                                    Toast.LENGTH_SHORT).show();
-
-                            mFacebookBtn.setEnabled(true);
-                        }
-                    }
-                });
-    }
 
 
 }

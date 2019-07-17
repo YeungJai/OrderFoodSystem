@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.daimajia.slider.library.SliderLayout;
-import com.example.orderfoodsystem.Common.Common;
 import com.example.orderfoodsystem.Interface.ItemClickListener;
 import com.example.orderfoodsystem.Model.Category;
 import com.example.orderfoodsystem.ViewHoler.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
@@ -106,6 +104,10 @@ public class Home extends AppCompatActivity
 
         //Setup Slider
 //        setupSlider();
+
+//        Intent service = new Intent(Home.this, ListenOrder.class);
+//        startService(service);
+
     }
 
     private void loadmenu() {

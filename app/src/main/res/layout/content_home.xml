@@ -9,28 +9,13 @@
     app:layout_behavior=""
     tools:context=".Home"
     tools:showIn="@layout/app_bar_home"
-    android:background="@drawable/bg1">
-
-    <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/slider"
-        android:layout_width="match_parent"
-        android:layout_marginTop="58dp"
-        android:layout_height="200dp"/>
-
-        <TextView
-            android:textColor="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:text="Category"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    android:background="@drawable/bg1"
+    android:layout_below="@+id/toolbar"
+    >
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="80dp"
         android:id="@+id/recycler_menu"
         android:scrollbars="none"
         android:layout_width="match_parent"
