@@ -59,7 +59,6 @@ public class OrderStatus extends AppCompatActivity {
                 viewHolder.txtOrderPhone.setText(model.getPhone());
             }
         };
-        Toast.makeText(this, "Value: ", Toast.LENGTH_SHORT).show();
         recyclerView.setAdapter(adapter);
     }
 

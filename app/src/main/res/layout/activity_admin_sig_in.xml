@@ -28,9 +28,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="532dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="84dp"
         android:background="@null"
         app:srcCompat="@drawable/signin" />

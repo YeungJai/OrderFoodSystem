@@ -3,9 +3,12 @@ package com.example.orderfoodsystem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +46,9 @@ public class FoodDetail extends AppCompatActivity {
 
     private FButton btn_OrderNow;
 
+    private ImageButton btnBack;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +78,17 @@ public class FoodDetail extends AppCompatActivity {
                 Toast.makeText(FoodDetail.this, "Added", Toast.LENGTH_SHORT).show();
             }
         });
+
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FoodDetail.this, FoodList.class);
+                startActivity(intent);
+
+            }
+        });
+
 
 //        btnCart.setOnClickListener(new View.OnClickListener() {
 //            @Override
