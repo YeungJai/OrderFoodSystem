@@ -17,9 +17,9 @@
         >
 
         <ImageView
-            android:layout_margin="10dp"
+            android:layout_margin="11dp"
             android:id="@+id/drink_image"
-            android:layout_width="350dp"
+            android:layout_width="352dp"
             android:layout_height="200dp" />
 
         <TextView

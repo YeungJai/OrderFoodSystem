@@ -3,7 +3,9 @@ package com.example.orderfoodsystem;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.andremion.counterfab.CounterFab;
 import com.daimajia.slider.library.SliderLayout;
+import com.example.orderfoodsystem.Database.Database;
 import com.example.orderfoodsystem.Interface.ItemClickListener;
 import com.example.orderfoodsystem.Model.Category;
 import com.example.orderfoodsystem.ViewHoler.MenuViewHolder;
@@ -53,6 +55,8 @@ public class Home extends AppCompatActivity
 
     FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
 
+    CounterFab fab;
+
 //    private SliderLayout sliderLayout;
 //    private PagerIndicator indicator;
 
@@ -68,7 +72,7 @@ public class Home extends AppCompatActivity
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +80,10 @@ public class Home extends AppCompatActivity
                 startActivity(cartIntent);
             }
         });
+
+
+        fab.setCount(new Database(this).getCountCart());
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -131,6 +139,12 @@ public class Home extends AppCompatActivity
             }
         };
         recycler_menu.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fab.setCount(new Database(this).getCountCart());
     }
 
     @Override

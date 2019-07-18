@@ -48,6 +48,8 @@ dependencies {
     implementation 'com.github.rey5137:material:1.2.4'
 
 
+    implementation 'com.github.andremion:counterfab:1.0.1'
+
     // Facebook
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     implementation 'com.google.firebase:firebase-database:18.0.0'

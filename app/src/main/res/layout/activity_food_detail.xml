@@ -191,12 +191,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <ImageButton
+    <info.hoang8f.widget.FButton
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:textColor="@android:color/white"
         android:id="@+id/btn_OrderNow"
+        android:text="Order Now"
         android:layout_gravity="center"
         android:layout_width="355sp"
         android:layout_height="wrap_content"
-        android:background="@drawable/confirm"
 
         />
 
