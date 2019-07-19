@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/edtName"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="138dp"
+        android:layout_marginEnd="136dp"
         android:layout_marginBottom="12dp"
         android:text="Yummy2U"
         android:textColor="#FFFFFF"

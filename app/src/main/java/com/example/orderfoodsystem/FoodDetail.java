@@ -46,7 +46,6 @@ public class FoodDetail extends AppCompatActivity {
 
     private FButton btn_OrderNow;
 
-    private ImageButton btnBack;
 
 
     @Override
@@ -79,15 +78,6 @@ public class FoodDetail extends AppCompatActivity {
             }
         });
 
-        btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FoodDetail.this, FoodList.class);
-                startActivity(intent);
-
-            }
-        });
 
 
 //        btnCart.setOnClickListener(new View.OnClickListener() {
