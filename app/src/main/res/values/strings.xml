@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OrderFoodSystem</string>
+    <string name="app_name">Yummy2U</string>
 
     <string name="facebook_application_id" translatable="false">534471860426430</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb534471860426430</string>

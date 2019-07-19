@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.andremion.counterfab.CounterFab;
 import com.daimajia.slider.library.SliderLayout;
+import com.example.orderfoodsystem.Common.Common;
 import com.example.orderfoodsystem.Database.Database;
 import com.example.orderfoodsystem.Interface.ItemClickListener;
 import com.example.orderfoodsystem.Model.Category;
@@ -98,7 +99,7 @@ public class Home extends AppCompatActivity
         //Set Name for user
         View headerView = navigationView.getHeaderView(0);
         txtFullName = (TextView)headerView.findViewById(R.id.txtFullName);
-//        txtFullName.setText(Common.currentUser.getName());
+        txtFullName.setText(Common.currentUser.getName());
 
         //Load menu
         recycler_menu = findViewById(R.id.recycler_menu);
